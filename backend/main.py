@@ -122,8 +122,8 @@ def generate_invite(
 ):
     """Genera un enlace/token de invitación. Si se pasa email, envía el correo."""
     token      = auth.create_invite_token()
-    invite_url = f"{APP_URL}/index.html?token={token}"
-    landing_url = f"{APP_URL}/landing.html"
+    invite_url  = f"{APP_URL}/app?token={token}"
+    landing_url = f"{APP_URL}/app/landing.html"
     if to_email:
         email_service.send_invite_link(to_email, invite_url)
     return {"invite_url": invite_url, "landing_url": landing_url, "token": token}
