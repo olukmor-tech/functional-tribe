@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FF4500">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Functional Tribe</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,700;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="i18n.js"></script>
+<style>
+.lang-toggle {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted); border-radius: 8px;
+  padding: 4px 10px; font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; cursor: pointer; font-family: 'Space Grotesk', sans-serif;
+}
+.lang-toggle:hover { color: var(--white); border-color: var(--orange); }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- LOGIN                                      -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-login" class="screen active" style="padding-bottom:0;">
+    <div style="position:absolute;top:20px;right:20px;">
+      <button class="lang-toggle" onclick="toggleLang()">EN</button>
+    </div>
+    <div class="login-logo">
+      <div class="bars">
+        <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+      </div>
+      <div class="wordmark"><span>T</span>RIBE</div>
+      <div class="sub" data-i18n="login.sub">Functional</div>
+    </div>
+    <form id="login-form" class="login-form">
+      <div class="form-group">
+        <label class="form-label" data-i18n="login.email">Email</label>
+        <input id="login-email" type="email" class="form-input" placeholder="tu@email.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="login.password">Contraseña</label>
+        <input id="login-password" type="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <div id="login-error" class="login-error"></div>
+      <button id="login-btn" type="submit" class="btn btn-primary" data-i18n="login.btn">Entrar</button>
+    </form>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- REGISTRO (via enlace/QR)                   -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-register" class="screen" style="padding-bottom:0;">
+    <div style="position:absolute;top:20px;right:20px;">
+      <button class="lang-toggle" onclick="toggleLang()">EN</button>
+    </div>
+    <div class="login-logo" style="margin-bottom:32px;">
+      <div class="bars">
+        <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+      </div>
+      <div class="wordmark"><span>T</span>RIBE</div>
+      <div class="sub" data-i18n="reg.title">Únete a la tribu</div>
+    </div>
+    <form id="register-form" class="login-form">
+      <div class="form-group">
+        <label class="form-label" data-i18n="reg.name">Nombre completo</label>
+        <input id="reg-name" type="text" class="form-input" data-i18n-ph="reg.name.ph" placeholder="Tu nombre" required autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="reg.email">Email</label>
+        <input id="reg-email" type="email" class="form-input" placeholder="tu@email.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-i18n="reg.password">Contraseña</label>
+        <input id="reg-password" type="password" class="form-input" data-i18n-ph="reg.password.ph" placeholder="Mínimo 6 caracteres" required autocomplete="new-password">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" data-i18n="reg.age">Edad</label>
+          <input id="reg-age" type="number" class="form-input" placeholder="25" min="16" max="99" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="reg.level">Nivel</label>
+          <select id="reg-level" class="form-input" required style="appearance:none;cursor:pointer;">
+            <option value="" data-i18n="reg.level.select">Selecciona...</option>
+            <option value="principiante" data-i18n="reg.level.beg">Principiante</option>
+            <option value="intermedio"   data-i18n="reg.level.mid">Intermedio</option>
+            <option value="avanzado"     data-i18n="reg.level.adv">Avanzado</option>
+          </select>
+        </div>
+      </div>
+      <div id="register-error" class="login-error"></div>
+      <button id="register-btn" type="submit" class="btn btn-primary" data-i18n="reg.btn">Crear cuenta</button>
+      <p style="font-size:12px;color:var(--muted);text-align:center;line-height:1.5;" data-i18n="reg.legal">
+        Al registrarte aceptas que tus datos se usen para gestionar tus clases con tu entrenador.
+      </p>
+    </form>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ENTRENADOR: DASHBOARD                      -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-trainer-home" class="screen">
+    <div class="topbar">
+      <div class="topbar-logo">
+        <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+        <div class="wordmark"><span>T</span>RIBE</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="lang-toggle" onclick="toggleLang()">EN</button>
+        <button class="avatar-btn trainer-avatar" onclick="logout()">O</button>
+      </div>
+    </div>
+    <div class="body-pad">
+      <div id="trainer-greeting" class="greeting">
+        <div class="hello" data-i18n="trainer.hello">Buenos días,</div>
+        <div class="name">Oliver 👋</div>
+      </div>
+      <div id="trainer-date-strip" class="date-strip"></div>
+      <div id="trainer-stats" class="stats-row"></div>
+      <div class="s-label" data-i18n="trainer.day_classes">Clases del día</div>
+      <div id="trainer-class-list"></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ENTRENADOR: DETALLE CLASE                  -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-class-detail" class="screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="loadTrainerDashboard()">← Volver</button>
+      <div id="class-detail-title" class="topbar-title">Detalle clase</div>
+      <div style="width:60px;"></div>
+    </div>
+    <div class="body-pad">
+      <div id="class-detail-content"></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ENTRENADOR: ALUMNOS                        -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-students" class="screen">
+    <div class="topbar">
+      <div class="topbar-logo">
+        <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+        <div class="wordmark"><span>T</span>RIBE</div>
+      </div>
+      <button class="avatar-btn trainer-avatar" onclick="logout()">O</button>
+    </div>
+    <div class="body-pad">
+      <div id="students-header" class="s-label"></div>
+      <div id="students-alert" class="alert-banner" style="display:none;"></div>
+      <div id="students-list"></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ENTRENADOR: NUEVA CLASE                    -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-new-class" class="screen">
+    <div class="topbar">
+      <button class="back-btn" onclick="loadTrainerDashboard()">← Volver</button>
+      <div class="topbar-title">Nueva Clase</div>
+      <div style="width:60px;"></div>
+    </div>
+    <div class="body-pad">
+      <form id="new-class-form" style="display:flex;flex-direction:column;gap:14px;">
+        <div class="form-group">
+          <label class="form-label">Día</label>
+          <input id="nc-date" type="date" class="form-input" required>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Hora inicio</label>
+            <input id="nc-time-start" type="time" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hora fin</label>
+            <input id="nc-time-end" type="time" class="form-input">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ubicación</label>
+          <input id="nc-location" type="text" class="form-input" placeholder="Ej: Parque del Olivar" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tipo de entrenamiento</label>
+          <input id="nc-type" type="text" class="form-input" value="Funcional">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Plazas máximas</label>
+          <div class="stepper">
+            <button type="button" id="nc-spots-minus" class="stepper-btn">−</button>
+            <div id="nc-spots-val" class="stepper-val">10</div>
+            <button type="button" id="nc-spots-plus" class="stepper-btn">+</button>
+          </div>
+        </div>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:10px;">
+          <button id="nc-submit" type="submit" class="btn btn-primary">Crear clase</button>
+          <button type="button" class="btn btn-outline" onclick="loadTrainerDashboard()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ALUMNO: HOME                               -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-student-home" class="screen">
+    <div class="topbar">
+      <div class="topbar-logo">
+        <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+        <div class="wordmark"><span>T</span>RIBE</div>
+      </div>
+      <button class="avatar-btn student-avatar-btn" onclick="loadProfile()">A</button>
+    </div>
+    <div class="body-pad">
+      <div id="student-greeting" class="greeting">
+        <div class="hello">Hola,</div>
+        <div class="name">Ana 🔥</div>
+      </div>
+      <div id="student-bono"></div>
+      <div id="student-date-strip" class="date-strip"></div>
+      <div class="s-label">Clases disponibles</div>
+      <div id="student-class-list"></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ALUMNO: MIS RESERVAS                       -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-my-bookings" class="screen">
+    <div class="topbar">
+      <div class="topbar-logo">
+        <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+        <div class="wordmark"><span>T</span>RIBE</div>
+      </div>
+      <button class="avatar-btn student-avatar-btn" onclick="loadProfile()">A</button>
+    </div>
+    <div class="body-pad">
+      <div id="my-bookings-list"></div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- ALUMNO: PERFIL                             -->
+  <!-- ══════════════════════════════════════════ -->
+  <div id="screen-profile" class="screen">
+    <div class="topbar">
+      <div class="topbar-logo">
+        <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+        <div class="wordmark"><span>T</span>RIBE</div>
+      </div>
+      <button class="icon-btn" onclick="logout()">⎋</button>
+    </div>
+    <div class="body-pad">
+      <div id="profile-avatar" class="profile-avatar-big">A</div>
+      <div id="profile-name" class="profile-name">Nombre</div>
+      <div id="profile-email" class="profile-email">email</div>
+      <div id="profile-bono"></div>
+      <div id="profile-stats" class="stats-row"></div>
+      <div class="s-label">Notificaciones</div>
+      <div class="student-row">
+        <div class="student-info"><div class="student-name">Recordatorio 24h antes</div></div>
+        <div class="toggle"></div>
+      </div>
+      <div class="student-row">
+        <div class="student-info"><div class="student-name">Aviso bono agotándose</div></div>
+        <div class="toggle"></div>
+      </div>
+      <button class="btn btn-outline" style="margin-top:8px;" onclick="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- NAV BARS                                   -->
+  <!-- ══════════════════════════════════════════ -->
+
+  <!-- Entrenador -->
+  <nav id="nav-trainer" class="bottom-nav" style="display:none;">
+    <div id="tn-home" class="nav-item">
+      <span class="nav-icon active">📅</span>
+    </div>
+    <div id="tn-students" class="nav-item">
+      <span class="nav-icon">👥</span>
+    </div>
+    <div id="tn-add" class="nav-item">
+      <span style="font-size:28px;color:var(--orange);font-weight:300;line-height:1;">+</span>
+    </div>
+    <div id="tn-invite" class="nav-item">
+      <span class="nav-icon">🔗</span>
+    </div>
+  </nav>
+
+  <!-- Alumno -->
+  <nav id="nav-student" class="bottom-nav" style="display:none;">
+    <div id="sn-home" class="nav-item">
+      <span class="nav-icon active">🏠</span>
+    </div>
+    <div id="sn-bookings" class="nav-item">
+      <span class="nav-icon">📅</span>
+    </div>
+    <div id="sn-profile" class="nav-item">
+      <span class="nav-icon">👤</span>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- MODALES                                    -->
+  <!-- ══════════════════════════════════════════ -->
+
+  <!-- Modal alumno -->
+  <div id="modal-student" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div id="modal-student-avatar" class="student-avatar" style="width:48px;height:48px;font-size:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;flex-shrink:0;"></div>
+        <div>
+          <div id="modal-student-name" class="student-name" style="font-size:18px;"></div>
+          <div id="modal-student-email" class="student-sub"></div>
+        </div>
+      </div>
+      <div id="modal-student-info"></div>
+      <button class="btn btn-outline" onclick="closeModal('modal-student')">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Modal invitación + QR -->
+  <div id="modal-invite" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <div class="modal-title">🔗 Compartir</div>
+
+      <!-- Tabs -->
+      <div style="display:flex;gap:8px;background:#111;border-radius:10px;padding:4px;">
+        <button id="tab-landing" onclick="switchInviteTab('landing')"
+          style="flex:1;padding:8px;border:none;border-radius:8px;background:var(--orange);color:#fff;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:500;cursor:pointer;">
+          📱 Landing pública
+        </button>
+        <button id="tab-invite" onclick="switchInviteTab('invite')"
+          style="flex:1;padding:8px;border:none;border-radius:8px;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;font-size:13px;cursor:pointer;">
+          🎟️ Alta directa
+        </button>
+      </div>
+
+      <!-- Panel landing -->
+      <div id="panel-landing">
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;">
+          QR para Instagram, flyers o stories. Lleva a tu página pública con tus redes y el formulario de solicitud.
+        </p>
+        <div style="display:flex;justify-content:center;padding:8px 0;">
+          <div id="landing-qr" style="background:#fff;padding:14px;border-radius:12px;"></div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:10px;padding:10px;font-size:11px;color:var(--muted);word-break:break-all;font-family:monospace;text-align:center;" id="landing-url"></div>
+        <button class="btn btn-primary" onclick="navigator.clipboard.writeText(document.getElementById('landing-url').textContent).then(()=>toast('✅ Enlace copiado'))">
+          Copiar enlace landing
+        </button>
+      </div>
+
+      <!-- Panel alta directa -->
+      <div id="panel-invite" style="display:none;">
+        <p style="font-size:13px;color:var(--muted);line-height:1.6;">
+          Enlace de registro directo. Mándalo por WhatsApp a un alumno concreto. Caduca en 7 días.
+        </p>
+        <div style="display:flex;justify-content:center;padding:8px 0;">
+          <div id="invite-qr" style="background:#fff;padding:14px;border-radius:12px;"></div>
+        </div>
+        <div style="background:#1a1a1a;border-radius:10px;padding:10px;font-size:11px;color:var(--muted);word-break:break-all;font-family:monospace;text-align:center;" id="invite-url"></div>
+        <button class="btn btn-primary" onclick="navigator.clipboard.writeText(document.getElementById('invite-url').textContent).then(()=>toast('✅ Enlace copiado'))">
+          Copiar enlace de registro
+        </button>
+      </div>
+
+      <button class="btn btn-outline" onclick="closeModal('modal-invite')">Cerrar</button>
+    </div>
+  </div>
+
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

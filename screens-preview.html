@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Functional Tribe — Screens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;1,700;1,900&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange: #FF4500;
+  --orange-dim: #FF450022;
+  --black:  #0A0A0A;
+  --bg:     #111111;
+  --card:   #1A1A1A;
+  --border: #242424;
+  --white:  #F5F2EE;
+  --muted:  #666;
+  --green:  #4CAF7D;
+  --red:    #E53935;
+  --amber:  #FFB300;
+}
+
+body {
+  background: #0d0d0d;
+  font-family: 'Space Grotesk', sans-serif;
+  padding: 48px 32px 80px;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.page-header h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.page-header h1 span { color: var(--orange); }
+.page-header p {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── SECTION ── */
+.section-title {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.screens-row {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 60px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+/* ── PHONE MOCKUP ── */
+.phone {
+  flex-shrink: 0;
+  width: 260px;
+}
+.phone-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  text-align: center;
+}
+.phone-frame {
+  width: 260px;
+  background: var(--bg);
+  border-radius: 32px;
+  border: 1.5px solid #282828;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+}
+
+/* Status bar */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 6px;
+  background: var(--bg);
+}
+.status-bar .time {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--white);
+}
+.status-bar .icons {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.status-bar .icons span {
+  width: 14px;
+  height: 8px;
+  background: var(--white);
+  border-radius: 1px;
+  opacity: 0.8;
+}
+.status-bar .icons .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--white);
+}
+
+/* Top nav */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px 14px;
+  background: var(--bg);
+}
+.top-nav .logo-small {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.top-nav .bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+}
+.top-nav .bars span {
+  background: var(--orange);
+  border-radius: 1px;
+  display: block;
+}
+.top-nav .bars .b1 { width: 4px; height: 8px; }
+.top-nav .bars .b2 { width: 4px; height: 12px; opacity: 0.85; }
+.top-nav .bars .b3 { width: 4px; height: 16px; opacity: 0.7; }
+.top-nav .logo-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--white);
+}
+.top-nav .logo-text span { color: var(--orange); }
+.top-nav .avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+.top-nav .icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Screen body */
+.screen-body {
+  padding: 0 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 480px;
+}
+
+/* Greeting */
+.greeting {
+  padding: 6px 0 10px;
+}
+.greeting .hello {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+}
+.greeting .name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 26px;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+/* Date chip */
+.date-strip {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.date-chip {
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  background: var(--card);
+  color: var(--muted);
+  cursor: pointer;
+}
+.date-chip.active {
+  background: var(--orange);
+  color: #fff;
+}
+
+/* Section label inline */
+.s-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 6px 0 2px;
+}
+
+/* Class card (trainer) */
+.class-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid var(--border);
+}
+.class-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.class-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--white);
+  line-height: 1;
+}
+.class-spots {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.spots-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: var(--orange);
+  line-height: 1;
+}
+.spots-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.class-location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.class-location .pin { font-size: 11px; }
+.capacity-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.capacity-fill {
+  height: 100%;
+  background: var(--orange);
+  border-radius: 2px;
+}
+.capacity-fill.full { background: var(--red); }
+.capacity-fill.low  { background: var(--green); }
+
+/* Pill badges */
+.pill {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.pill-green { background: #4CAF7D22; color: var(--green); }
+.pill-red   { background: #E5393522; color: var(--red); }
+.pill-amber { background: #FFB30022; color: var(--amber); }
+.pill-orange{ background: var(--orange-dim); color: var(--orange); }
+
+/* Student row */
+.student-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.student-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+.student-info { flex: 1; }
+.student-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1;
+}
+.student-sub {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* Stats row */
+.stats-row {
+  display: flex;
+  gap: 8px;
+}
+.stat-box {
+  flex: 1;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid var(--border);
+}
+.stat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--white);
+  line-height: 1;
+}
+.stat-val span { color: var(--orange); font-size: 14px; }
+.stat-lbl {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* Bono card (student) */
+.bono-card {
+  background: linear-gradient(135deg, #1f0f00, #2a1200);
+  border: 1px solid #3d1f00;
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bono-left .bono-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #a06040;
+}
+.bono-left .bono-type {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--white);
+  margin-top: 2px;
+}
+.bono-right .bono-count {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 42px;
+  color: var(--orange);
+  line-height: 1;
+  text-align: right;
+}
+.bono-right .bono-of {
+  font-size: 10px;
+  color: var(--muted);
+  text-align: right;
+}
+.bono-dots {
+  display: flex;
+  gap: 5px;
+  margin-top: 10px;
+}
+.bono-dot {
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--orange);
+}
+.bono-dot.used {
+  background: #2a2a2a;
+}
+
+/* Class card student */
+.class-card-student {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.class-card-accent {
+  height: 3px;
+  background: var(--orange);
+}
+.class-card-body {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.class-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.class-type {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.class-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.class-hour {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 34px;
+  color: var(--white);
+  line-height: 1;
+}
+.class-avail {
+  font-size: 11px;
+  color: var(--green);
+  font-weight: 500;
+}
+.btn-reserve {
+  width: 100%;
+  padding: 11px;
+  background: var(--orange);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 2px;
+}
+.btn-outline {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+/* Reserved badge */
+.reserved-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reserved-left {}
+.reserved-time {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--white);
+  line-height: 1;
+}
+.reserved-loc {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.reserved-date {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 3px;
+}
+.cancel-x {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Bottom nav */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 10px 18px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.nav-icon { font-size: 18px; opacity: 0.4; }
+.nav-icon.active { opacity: 1; }
+.nav-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+/* Alert banner */
+.alert-banner {
+  background: #1a0f00;
+  border: 1px solid #3d2000;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.alert-icon { font-size: 14px; }
+.alert-text { font-size: 11px; color: var(--amber); line-height: 1.4; }
+
+/* Form input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.form-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.form-input {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+}
+.form-input.focused {
+  border-color: var(--orange);
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <h1><span>T</span>RIBE · Screens</h1>
+    <p style="margin-top:4px;">App Design · v1.0 · 2026</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  ENTRENADOR                                 -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-title">Vista Entrenador</div>
+
+<div class="screens-row">
+
+  <!-- SCREEN E1: Dashboard del día -->
+  <div class="phone">
+    <div class="phone-label">E1 · Mis clases hoy</div>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="icons">
+          <span></span><span></span><span class="dot"></span>
+        </div>
+      </div>
+      <div class="top-nav">
+        <div class="logo-small">
+          <div class="bars">
+            <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+          </div>
+          <span class="logo-text"><span>T</span>RIBE</span>
+        </div>
+        <div class="avatar">O</div>
+      </div>
+      <div class="screen-body">
+        <div class="greeting">
+          <div class="hello">Buenos días,</div>
+          <div class="name">Oliver 👋</div>
+        </div>
+
+        <div class="date-strip">
+          <div class="date-chip">Lun</div>
+          <div class="date-chip active">Mar</div>
+          <div class="date-chip">Mié</div>
+          <div class="date-chip">Jue</div>
+          <div class="date-chip">Vie</div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-val">3<span>clases</span></div>
+            <div class="stat-lbl">Hoy</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">21<span>alumn.</span></div>
+            <div class="stat-lbl">Total hoy</div>
+          </div>
+        </div>
+
+        <div class="s-label">Clases del día</div>
+
+        <div class="class-card">
+          <div class="class-card-header">
+            <div>
+              <div class="class-time">09:00</div>
+            </div>
+            <div class="class-spots">
+              <div class="spots-num">8/10</div>
+              <div class="spots-label">plazas</div>
+            </div>
+          </div>
+          <div class="class-location"><span class="pin">📍</span> Parque del Olivar</div>
+          <div class="capacity-bar"><div class="capacity-fill" style="width:80%"></div></div>
+        </div>
+
+        <div class="class-card">
+          <div class="class-card-header">
+            <div>
+              <div class="class-time">11:00</div>
+            </div>
+            <div class="class-spots">
+              <div class="spots-num">10/10</div>
+              <div class="spots-label">plazas</div>
+            </div>
+          </div>
+          <div class="class-location"><span class="pin">📍</span> Parque del Olivar</div>
+          <div class="capacity-bar"><div class="capacity-fill full" style="width:100%"></div></div>
+          <div><span class="pill pill-red">Completa</span></div>
+        </div>
+
+        <div class="class-card">
+          <div class="class-card-header">
+            <div>
+              <div class="class-time">18:30</div>
+            </div>
+            <div class="class-spots">
+              <div class="spots-num">3/10</div>
+              <div class="spots-label">plazas</div>
+            </div>
+          </div>
+          <div class="class-location"><span class="pin">📍</span> Por confirmar</div>
+          <div class="capacity-bar"><div class="capacity-fill low" style="width:30%"></div></div>
+          <div><span class="pill pill-green">Plazas libres</span></div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item">
+          <span class="nav-icon active">📅</span>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="nav-item">
+          <span class="nav-icon">👥</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-icon">➕</span>
+        </div>
+        <div class="nav-item">
+          <span class="nav-icon">💳</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN E2: Detalle clase -->
+  <div class="phone">
+    <div class="phone-label">E2 · Detalle de clase</div>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="icons"><span></span><span></span><span class="dot"></span></div>
+      </div>
+      <div class="top-nav">
+        <div style="font-size:18px;color:var(--muted);">← </div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:16px;color:var(--white);">Clase 09:00</div>
+        <div class="icon-btn">⋯</div>
+      </div>
+      <div class="screen-body">
+
+        <div class="class-card" style="background:#1f0f00;border-color:#3d1f00;">
+          <div class="class-card-header">
+            <div class="class-time" style="font-size:38px;">09:00</div>
+            <div class="class-spots">
+              <div class="spots-num">8/10</div>
+              <div class="spots-label">plazas</div>
+            </div>
+          </div>
+          <div class="class-location"><span class="pin">📍</span> Parque del Olivar · Martes 27 mayo</div>
+          <div class="capacity-bar"><div class="capacity-fill" style="width:80%"></div></div>
+        </div>
+
+        <div class="s-label">Alumnos apuntados</div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#E53935;">AL</div>
+          <div class="student-info">
+            <div class="student-name">Ana López</div>
+            <div class="student-sub">Mensualidad · al día</div>
+          </div>
+          <span class="pill pill-green">✓</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#1565C0;">CR</div>
+          <div class="student-info">
+            <div class="student-name">Carlos Ruiz</div>
+            <div class="student-sub">Bono 10 · 3 clases restantes</div>
+          </div>
+          <span class="pill pill-amber">⚠ 3</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#2E7D32;">MG</div>
+          <div class="student-info">
+            <div class="student-name">María García</div>
+            <div class="student-sub">Mensualidad · al día</div>
+          </div>
+          <span class="pill pill-green">✓</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#6A1B9A;">JM</div>
+          <div class="student-info">
+            <div class="student-name">Javi Mora</div>
+            <div class="student-sub">Clase suelta · pendiente pago</div>
+          </div>
+          <span class="pill pill-red">€ pdte</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#00695C;">SP</div>
+          <div class="student-info">
+            <div class="student-name">Sara Peña</div>
+            <div class="student-sub">Mensualidad · al día</div>
+          </div>
+          <span class="pill pill-green">✓</span>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <button class="btn-outline" style="flex:1;color:var(--red);border-color:#3d1010;">Cancelar clase</button>
+          <button class="btn-reserve" style="flex:1;">Avisar grupo</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN E3: Gestión alumnos -->
+  <div class="phone">
+    <div class="phone-label">E3 · Alumnos y pagos</div>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="icons"><span></span><span></span><span class="dot"></span></div>
+      </div>
+      <div class="top-nav">
+        <div class="logo-small">
+          <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+          <span class="logo-text"><span>T</span>RIBE</span>
+        </div>
+        <div class="icon-btn">🔍</div>
+      </div>
+      <div class="screen-body">
+        <div class="s-label">8 alumnos activos</div>
+
+        <div class="alert-banner">
+          <span class="alert-icon">⚠️</span>
+          <span class="alert-text">2 alumnos con pago pendiente esta semana</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#E53935;">AL</div>
+          <div class="student-info">
+            <div class="student-name">Ana López</div>
+            <div class="student-sub">Mensualidad · junio pagado</div>
+          </div>
+          <span class="pill pill-green">✓</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#1565C0;">CR</div>
+          <div class="student-info">
+            <div class="student-name">Carlos Ruiz</div>
+            <div class="student-sub">Bono 10 · quedan 3</div>
+          </div>
+          <span class="pill pill-amber">3 left</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#6A1B9A;">JM</div>
+          <div class="student-info">
+            <div class="student-name">Javi Mora</div>
+            <div class="student-sub">Clase suelta · sin pagar</div>
+          </div>
+          <span class="pill pill-red">€ pdte</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#2E7D32;">MG</div>
+          <div class="student-info">
+            <div class="student-name">María García</div>
+            <div class="student-sub">Mensualidad · mayo pendiente</div>
+          </div>
+          <span class="pill pill-red">€ pdte</span>
+        </div>
+
+        <div class="student-row">
+          <div class="student-avatar" style="background:#00695C;">SP</div>
+          <div class="student-info">
+            <div class="student-name">Sara Peña</div>
+            <div class="student-sub">Bono 10 · quedan 7</div>
+          </div>
+          <span class="pill pill-green">✓</span>
+        </div>
+
+        <button class="btn-reserve" style="margin-top:auto;">+ Añadir alumno</button>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><span class="nav-icon">📅</span></div>
+        <div class="nav-item">
+          <span class="nav-icon active">👥</span>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="nav-item"><span class="nav-icon">➕</span></div>
+        <div class="nav-item"><span class="nav-icon">💳</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN E4: Crear clase -->
+  <div class="phone">
+    <div class="phone-label">E4 · Nueva clase</div>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="icons"><span></span><span></span><span class="dot"></span></div>
+      </div>
+      <div class="top-nav">
+        <div style="font-size:18px;color:var(--muted);">←</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:16px;color:var(--white);">Nueva Clase</div>
+        <div style="width:30px;"></div>
+      </div>
+      <div class="screen-body">
+
+        <div class="form-group">
+          <div class="form-label">Día</div>
+          <div class="form-input">Miércoles, 28 mayo 2026</div>
+        </div>
+
+        <div style="display:flex;gap:8px;">
+          <div class="form-group" style="flex:1;">
+            <div class="form-label">Hora inicio</div>
+            <div class="form-input focused">09:00</div>
+          </div>
+          <div class="form-group" style="flex:1;">
+            <div class="form-label">Hora fin</div>
+            <div class="form-input">10:00</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">Ubicación</div>
+          <div class="form-input">📍 Parque del Olivar</div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">Plazas máximas</div>
+          <div style="display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--orange);border-radius:10px;padding:8px 14px;">
+            <div style="font-size:20px;color:var(--muted);cursor:pointer;">−</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:var(--white);flex:1;text-align:center;">10</div>
+            <div style="font-size:20px;color:var(--orange);cursor:pointer;">+</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">Tipo de entrenamiento</div>
+          <div class="form-input">Funcional general</div>
+        </div>
+
+        <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;padding-top:10px;">
+          <button class="btn-reserve">Crear clase</button>
+          <button class="btn-outline">Guardar como borrador</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════ -->
+<!--  ALUMNO                                     -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="section-title">Vista Alumno</div>
+
+<div class="screens-row">
+
+  <!-- SCREEN A1: Home alumno -->
+  <div class="phone">
+    <div class="phone-label">A1 · Clases disponibles</div>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="icons"><span></span><span></span><span class="dot"></span></div>
+      </div>
+      <div class="top-nav">
+        <div class="logo-small">
+          <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+          <span class="logo-text"><span>T</span>RIBE</span>
+        </div>
+        <div class="avatar" style="background:#1565C0;">A</div>
+      </div>
+      <div class="screen-body">
+        <div class="greeting">
+          <div class="hello">Hola,</div>
+          <div class="name">Ana 🔥</div>
+        </div>
+
+        <div class="bono-card">
+          <div class="bono-left">
+            <div class="bono-label">Tu bono</div>
+            <div class="bono-type">Mensualidad</div>
+            <div class="bono-dots">
+              <div class="bono-dot"></div>
+              <div class="bono-dot"></div>
+              <div class="bono-dot"></div>
+              <div class="bono-dot used"></div>
+              <div class="bono-dot used"></div>
+            </div>
+          </div>
+          <div class="bono-right">
+            <div class="bono-count">∞</div>
+            <div class="bono-of">Ilimitado</div>
+          </div>
+        </div>
+
+        <div class="date-strip">
+          <div class="date-chip">Lun</div>
+          <div class="date-chip active">Mar</div>
+          <div class="date-chip">Mié</div>
+          <div class="date-chip">Jue</div>
+          <div class="date-chip">Vie</div>
+        </div>
+
+        <div class="s-label">Clases disponibles</div>
+
+        <div class="class-card-student">
+          <div class="class-card-accent"></div>
+          <div class="class-card-body">
+            <div class="class-meta">
+              <span class="class-type">Funcional</span>
+              <span class="pill pill-green">2 plazas</span>
+            </div>
+            <div class="class-info-row">
+              <div class="class-hour">09:00</div>
+              <div style="text-align:right;">
+                <div style="font-size:11px;color:var(--muted);">📍 Parque Olivar</div>
+                <div style="font-size:11px;color:var(--muted);">1h · 8/10</div>
+              </div>
+            </div>
+            <button class="btn-reserve">Reservar</button>
+          </div>
+        </div>
+
+        <div class="class-card-student">
+          <div class="class-card-accent" style="background:#444;"></div>
+          <div class="class-card-body">
+            <div class="class-meta">
+              <span class="class-type">Funcional</span>
+              <span class="pill pill-red">Completa</span>
+            </div>
+            <div class="class-info-row">
+              <div class="class-hour" style="color:var(--muted);">11:00</div>
+              <div style="text-align:right;">
+                <div style="font-size:11px;color:var(--muted);">📍 Parque Olivar</div>
+                <div style="font-size:11px;color:var(--muted);">1h · 10/10</div>
+              </div>
+            </div>
+            <button class="btn-outline">Lista de espera</button>
+          </div>
+        </div>
+
+        <div class="class-card-student">
+          <div class="class-card-accent"></div>
+          <div class="class-card-body">
+            <div class="class-meta">
+              <span class="class-type">Funcional</span>
+              <span class="pill pill-green">7 plazas</span>
+            </div>
+            <div class="class-info-row">
+              <div class="class-hour">18:30</div>
+              <div style="text-align:right;">
+                <div style="font-size:11px;color:var(--muted);">📍 Por confirmar</div>
+                <div style="font-size:11px;color:var(--muted);">1h · 3/10</div>
+              </div>
+            </div>
+            <button class="btn-reserve">Reservar</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item">
+          <span class="nav-icon active">🏠</span>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="nav-item"><span class="nav-icon">📅</span></div>
+        <div class="nav-item"><span class="nav-icon">👤</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN A2: Mis reservas -->
+  <div class="phone">
+    <div class="phone-label">A2 · Mis reservas</div>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="icons"><span></span><span></span><span class="dot"></span></div>
+      </div>
+      <div class="top-nav">
+        <div class="logo-small">
+          <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+          <span class="logo-text"><span>T</span>RIBE</span>
+        </div>
+        <div class="avatar" style="background:#1565C0;">A</div>
+      </div>
+      <div class="screen-body">
+
+        <div class="s-label">Próximas</div>
+
+        <div class="reserved-card">
+          <div class="reserved-left">
+            <div class="reserved-date">Mié 28 mayo</div>
+            <div class="reserved-time">09:00</div>
+            <div class="reserved-loc">📍 Parque del Olivar</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <span class="pill pill-orange">Confirmada</span>
+            <div class="cancel-x">✕</div>
+          </div>
+        </div>
+
+        <div class="reserved-card">
+          <div class="reserved-left">
+            <div class="reserved-date">Vie 30 mayo</div>
+            <div class="reserved-time">18:30</div>
+            <div class="reserved-loc">📍 Por confirmar</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+            <span class="pill pill-orange">Confirmada</span>
+            <div class="cancel-x">✕</div>
+          </div>
+        </div>
+
+        <div class="s-label" style="margin-top:8px;">Historial</div>
+
+        <div class="reserved-card" style="opacity:0.5;">
+          <div class="reserved-left">
+            <div class="reserved-date" style="color:var(--muted);">Mar 27 mayo</div>
+            <div class="reserved-time" style="color:var(--muted);">09:00</div>
+            <div class="reserved-loc">📍 Parque del Olivar</div>
+          </div>
+          <span class="pill" style="background:#1a1a1a;color:var(--muted);">Asistida</span>
+        </div>
+
+        <div class="reserved-card" style="opacity:0.5;">
+          <div class="reserved-left">
+            <div class="reserved-date" style="color:var(--muted);">Lun 26 mayo</div>
+            <div class="reserved-time" style="color:var(--muted);">11:00</div>
+            <div class="reserved-loc">📍 Parque del Olivar</div>
+          </div>
+          <span class="pill" style="background:#1a1a1a;color:var(--muted);">Asistida</span>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><span class="nav-icon">🏠</span></div>
+        <div class="nav-item">
+          <span class="nav-icon active">📅</span>
+          <div class="nav-dot"></div>
+        </div>
+        <div class="nav-item"><span class="nav-icon">👤</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN A3: Perfil + Bono -->
+  <div class="phone">
+    <div class="phone-label">A3 · Mi perfil</div>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span class="time">9:41</span>
+        <div class="icons"><span></span><span></span><span class="dot"></span></div>
+      </div>
+      <div class="top-nav">
+        <div class="logo-small">
+          <div class="bars"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+          <span class="logo-text"><span>T</span>RIBE</span>
+        </div>
+        <div style="font-size:14px;color:var(--muted);">⚙</div>
+      </div>
+      <div class="screen-body">
+        <!-- Avatar grande -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0;">
+          <div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#FF4500,#ff8c5a);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;">AL</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:22px;color:var(--white);">Ana López</div>
+          <div style="font-size:11px;color:var(--muted);">ana@email.com</div>
+        </div>
+
+        <!-- Bono con bono de clases -->
+        <div class="bono-card">
+          <div class="bono-left">
+            <div class="bono-label">Tu plan actual</div>
+            <div class="bono-type">Bono 10 clases</div>
+            <div class="bono-dots" style="margin-top:8px;">
+              <div class="bono-dot"></div>
+              <div class="bono-dot"></div>
+              <div class="bono-dot"></div>
+              <div class="bono-dot used"></div>
+              <div class="bono-dot used"></div>
+              <div class="bono-dot used"></div>
+              <div class="bono-dot used"></div>
+              <div class="bono-dot used"></div>
+              <div class="bono-dot used"></div>
+              <div class="bono-dot used"></div>
+            </div>
+          </div>
+          <div class="bono-right">
+            <div class="bono-count">3</div>
+            <div class="bono-of">de 10</div>
+          </div>
+        </div>
+
+        <!-- Stats personales -->
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-val">12</div>
+            <div class="stat-lbl">Clases totales</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">3</div>
+            <div class="stat-lbl">Este mes</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">92<span>%</span></div>
+            <div class="stat-lbl">Asistencia</div>
+          </div>
+        </div>
+
+        <div class="s-label">Ajustes de notificaciones</div>
+        <div class="student-row">
+          <div class="student-info">
+            <div class="student-name">Recordatorio 24h antes</div>
+          </div>
+          <div style="width:36px;height:20px;background:var(--orange);border-radius:10px;position:relative;">
+            <div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px;"></div>
+          </div>
+        </div>
+        <div class="student-row">
+          <div class="student-info">
+            <div class="student-name">Aviso bono agotándose</div>
+          </div>
+          <div style="width:36px;height:20px;background:var(--orange);border-radius:10px;position:relative;">
+            <div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px;"></div>
+          </div>
+        </div>
+
+      </div>
+      <div class="bottom-nav">
+        <div class="nav-item"><span class="nav-icon">🏠</span></div>
+        <div class="nav-item"><span class="nav-icon">📅</span></div>
+        <div class="nav-item">
+          <span class="nav-icon active">👤</span>
+          <div class="nav-dot"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#2a2a2a;font-family:'Space Grotesk',sans-serif;">
+  Functional Tribe · App Screens v1.0 · 2026
+</p>
+
+</body>
+</html>

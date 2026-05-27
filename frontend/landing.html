@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FF4500">
+<meta name="description" content="Entrenamiento funcional en grupo. Reserva tu plaza.">
+
+<!-- Open Graph (preview al compartir en redes) -->
+<meta property="og:title"       content="Functional Tribe">
+<meta property="og:description" content="Entrena con propósito. Únete a la tribu.">
+<meta property="og:image"       content="og-image.jpg">
+<meta property="og:type"        content="website">
+
+<title>Functional Tribe</title>
+<script src="i18n.js"></script>
+<style>
+.lang-toggle-landing {
+  position: fixed; top: 16px; right: 16px; z-index: 50;
+  background: rgba(10,10,10,0.7); border: 1px solid rgba(255,255,255,0.15);
+  color: #F5F2EE; border-radius: 8px; padding: 5px 12px;
+  font-size: 11px; font-weight: 600; letter-spacing: 1px;
+  cursor: pointer; font-family: 'Space Grotesk', sans-serif;
+  backdrop-filter: blur(8px);
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;1,700;1,900&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --orange: #FF4500;
+  --black:  #0A0A0A;
+  --card:   #141414;
+  --border: #222;
+  --white:  #F5F2EE;
+  --muted:  #666;
+}
+
+html, body {
+  min-height: 100%;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ── */
+.page {
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 55dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+/* Foto de fondo del entrenador */
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  background: #1a1a1a;
+  background-image: url('trainer-photo.jpg');
+  background-size: cover;
+  background-position: center top;
+}
+
+/* Degradado sobre la foto */
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,10,0.15) 0%,
+    rgba(10,10,10,0.5)  50%,
+    rgba(10,10,10,0.95) 85%,
+    rgba(10,10,10,1)    100%
+  );
+}
+
+/* Logo arriba a la izquierda */
+.hero-logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+.hero-logo .bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+}
+.hero-logo .bars span {
+  background: var(--orange);
+  border-radius: 1.5px;
+  display: block;
+}
+.hero-logo .bars .b1 { width: 4px; height: 10px; }
+.hero-logo .bars .b2 { width: 4px; height: 15px; opacity:.85; }
+.hero-logo .bars .b3 { width: 4px; height: 20px; opacity:.7; }
+.hero-logo .wordmark {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--white);
+}
+.hero-logo .wordmark span { color: var(--orange); }
+
+/* Texto del hero */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 24px 28px;
+}
+.hero-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+.hero-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 52px;
+  line-height: 0.9;
+  color: var(--white);
+  letter-spacing: -1px;
+}
+.hero-role {
+  font-size: 14px;
+  color: rgba(245,242,238,0.6);
+  margin-top: 6px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* Foto placeholder si no hay imagen */
+.hero-photo.placeholder {
+  background: linear-gradient(160deg, #1a0800 0%, #2a1200 40%, #0a0a0a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-photo.placeholder::after {
+  content: '🏋️';
+  font-size: 80px;
+  opacity: .15;
+}
+
+/* ── BODY ── */
+.body {
+  flex: 1;
+  padding: 24px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: var(--black);
+}
+
+/* Descripción */
+.bio {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(245,242,238,0.7);
+  font-weight: 300;
+}
+.bio strong { color: var(--white); font-weight: 500; }
+
+/* Stats rápidos */
+.quick-stats {
+  display: flex;
+  gap: 10px;
+}
+.qs-item {
+  flex: 1;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.qs-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--orange);
+  line-height: 1;
+}
+.qs-lbl {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Redes sociales */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--white);
+  transition: border-color .15s, transform .1s;
+  cursor: pointer;
+}
+.social-btn:active { transform: scale(0.98); }
+.social-btn:hover  { border-color: #3a3a3a; }
+.social-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.social-info { flex: 1; }
+.social-name {
+  font-size: 14px; font-weight: 500; color: var(--white); line-height: 1;
+}
+.social-handle {
+  font-size: 12px; color: var(--muted); margin-top: 3px;
+}
+.social-arrow { font-size: 16px; color: var(--muted); }
+
+.ig-icon  { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.tik-icon { background: #000; border: 1px solid #333; }
+.wa-icon  { background: #25D366; }
+
+/* CTA principal */
+.cta-section {
+  margin-top: 4px;
+}
+.cta-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.btn-cta {
+  width: 100%;
+  padding: 16px;
+  background: var(--orange);
+  border: none;
+  border-radius: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity .15s, transform .1s;
+}
+.btn-cta:active { opacity: .85; transform: scale(0.98); }
+
+/* ── FORMULARIO DE SOLICITUD ── */
+.request-form {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: -8px;
+}
+.request-form.open { display: flex; }
+
+.form-label {
+  font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--muted);
+  display: block; margin-bottom: 5px;
+}
+.form-input {
+  width: 100%;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  color: var(--white);
+  font-family: 'Space Grotesk', sans-serif;
+  outline: none;
+  transition: border-color .15s;
+}
+.form-input:focus { border-color: var(--orange); }
+select.form-input { appearance: none; cursor: pointer; }
+
+.btn-send {
+  width: 100%;
+  padding: 13px;
+  background: var(--orange);
+  border: none; border-radius: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-style: italic; font-size: 16px;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: #fff; cursor: pointer;
+}
+
+/* ── SUCCESS ── */
+.success-msg {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px;
+  background: #0d1f0d;
+  border: 1px solid #1a3a1a;
+  border-radius: 16px;
+  text-align: center;
+}
+.success-msg.show { display: flex; }
+.success-msg .emoji { font-size: 40px; }
+.success-msg p { font-size: 14px; color: #9db89e; line-height: 1.6; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  font-size: 11px;
+  color: #2a2a2a;
+  padding: 0 20px 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<button class="lang-toggle-landing lang-toggle" onclick="toggleLang()">EN</button>
+
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-photo placeholder" id="hero-photo"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-logo">
+      <div class="bars">
+        <span class="b1"></span><span class="b2"></span><span class="b3"></span>
+      </div>
+      <div class="wordmark"><span>T</span>RIBE</div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-label" data-i18n="landing.role">Entrenador personal</div>
+      <div class="hero-name">Oliver<br>Luque Moreno</div>
+      <div class="hero-role" data-i18n="landing.tagline">Entrenamiento funcional en grupo</div>
+    </div>
+  </div>
+
+  <!-- ── BODY ── -->
+  <div class="body">
+
+    <!-- Bio -->
+    <p class="bio" data-i18n="landing.bio">
+      Grupos <strong>reducidos de 8-10 personas</strong> para que cada sesión sea
+      real, intensa y adaptada a ti. Funcional, al aire libre, sin excusas.
+    </p>
+
+    <!-- Stats -->
+    <div class="quick-stats">
+      <div class="qs-item">
+        <div class="qs-val">10</div>
+        <div class="qs-lbl" data-i18n="landing.spots">Plazas máx</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-val">3+</div>
+        <div class="qs-lbl" data-i18n="landing.sessions">Sesiones / sem</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-val">All</div>
+        <div class="qs-lbl" data-i18n="landing.levels">Niveles</div>
+      </div>
+    </div>
+
+    <!-- Redes sociales -->
+    <div class="social-links">
+
+      <a class="social-btn" href="https://instagram.com/TUNOMBRE" target="_blank" rel="noopener"
+         onclick="trackClick('instagram')">
+        <div class="social-icon ig-icon">📸</div>
+        <div class="social-info">
+          <div class="social-name">Instagram</div>
+          <div class="social-handle">@functionaltribe</div>
+        </div>
+        <div class="social-arrow">↗</div>
+      </a>
+
+      <a class="social-btn" href="https://tiktok.com/@TUNOMBRE" target="_blank" rel="noopener"
+         onclick="trackClick('tiktok')">
+        <div class="social-icon tik-icon">🎵</div>
+        <div class="social-info">
+          <div class="social-name">TikTok</div>
+          <div class="social-handle">@functionaltribe</div>
+        </div>
+        <div class="social-arrow">↗</div>
+      </a>
+
+      <a class="social-btn" href="https://wa.me/34TUNUMERO?text=Hola%2C%20quiero%20info%20sobre%20las%20clases%20de%20Functional%20Tribe%20%F0%9F%94%A5"
+         target="_blank" rel="noopener" onclick="trackClick('whatsapp')">
+        <div class="social-icon wa-icon">💬</div>
+        <div class="social-info">
+          <div class="social-name">WhatsApp</div>
+          <div class="social-handle" data-i18n="landing.wa_sub">Pregúntame lo que quieras</div>
+        </div>
+        <div class="social-arrow">↗</div>
+      </a>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="cta-label" data-i18n="landing.cta_label">¿Listo para entrenar?</div>
+      <button class="btn-cta" id="cta-btn" onclick="toggleForm()" data-i18n="landing.cta_btn">
+        Solicitar plaza →
+      </button>
+    </div>
+
+    <!-- Formulario de solicitud -->
+    <div class="request-form" id="request-form">
+      <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-style:italic;font-size:20px;color:var(--white);" data-i18n="landing.form_title">
+        Déjame tus datos 🔥
+      </div>
+      <p style="font-size:13px;color:var(--muted);line-height:1.5;" data-i18n="landing.form_desc">
+        Te escribo para contarte horarios, precios y disponibilidad.
+      </p>
+      <div>
+        <label class="form-label" data-i18n="landing.req_name">Nombre</label>
+        <input id="req-name" type="text" class="form-input" data-i18n-ph="landing.req_contact_ph" placeholder="Tu nombre" required>
+      </div>
+      <div>
+        <label class="form-label" data-i18n="landing.req_contact">Email o teléfono</label>
+        <input id="req-contact" type="text" class="form-input" data-i18n-ph="landing.req_contact_ph" placeholder="tu@email.com o 6XX XXX XXX" required>
+      </div>
+      <div>
+        <label class="form-label" data-i18n="landing.req_level">Nivel</label>
+        <select id="req-level" class="form-input">
+          <option value=""      data-i18n="landing.req_level_default">Selecciona tu nivel</option>
+          <option value="principiante" data-i18n="landing.req_beg">Principiante — empiezo desde cero</option>
+          <option value="intermedio"   data-i18n="landing.req_mid">Intermedio — tengo algo de base</option>
+          <option value="avanzado"     data-i18n="landing.req_adv">Avanzado — entreno regularmente</option>
+        </select>
+      </div>
+      <button class="btn-send" onclick="submitRequest()" data-i18n="landing.req_send">Enviar solicitud</button>
+    </div>
+
+    <!-- Mensaje de éxito -->
+    <div class="success-msg" id="success-msg">
+      <span class="emoji">✅</span>
+      <strong style="font-size:18px;color:var(--white);" data-i18n="landing.success_title">¡Solicitud enviada!</strong>
+      <p data-i18n="landing.success_msg">Me pondré en contacto contigo en las próximas 24 horas para confirmar tu plaza.</p>
+    </div>
+
+  </div>
+
+  <div class="footer">Functional Tribe</div>
+
+</div>
+
+<script>
+const API = window.location.hostname === 'localhost'
+  ? 'http://localhost:8000'
+  : '';
+
+// Inicializar idioma al cargar
+document.addEventListener('DOMContentLoaded', () => {
+  applyTranslations();
+  updateLangToggle();
+});
+
+function toggleForm() {
+  const form = document.getElementById('request-form');
+  const btn  = document.getElementById('cta-btn');
+  const open = form.classList.toggle('open');
+  btn.textContent = open ? 'Cerrar ×' : 'Solicitar plaza →';
+  if (open) form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+async function submitRequest() {
+  const name    = document.getElementById('req-name').value.trim();
+  const contact = document.getElementById('req-contact').value.trim();
+  const level   = document.getElementById('req-level').value;
+  if (!name || !contact) { alert('Rellena tu nombre y contacto'); return; }
+
+  try {
+    await fetch(API + '/interest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, contact, fitness_level: level || null })
+    });
+  } catch { /* Si la API no está disponible, igual mostramos el éxito */ }
+
+  // Ocultar form y mostrar éxito
+  document.getElementById('request-form').classList.remove('open');
+  document.getElementById('cta-btn').style.display = 'none';
+  document.getElementById('success-msg').classList.add('show');
+  document.getElementById('success-msg').scrollIntoView({ behavior: 'smooth' });
+}
+
+function trackClick(network) {
+  // Aquí puedes añadir analytics si quieres en el futuro
+  console.log('click:', network);
+}
+</script>
+
+</body>
+</html>
