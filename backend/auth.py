@@ -7,6 +7,11 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 import os
 
+# Fix de compatibilidad passlib 1.7.4 + bcrypt 4.x
+import bcrypt as _bcrypt
+if not hasattr(_bcrypt, '__about__'):
+    _bcrypt.__about__ = type('about', (), {'__version__': _bcrypt.__version__})()
+
 from database import get_db
 import models
 
