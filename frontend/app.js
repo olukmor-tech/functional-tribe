@@ -441,6 +441,60 @@ async function openStudentDetail(studentId) {
 
 const LEVEL_LABELS = { principiante: 'Principiante', intermedio: 'Intermedio', avanzado: 'Avanzado' };
 
+function assignMembershipForm(studentId) {
+  return `
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
+      <div class="form-group" style="margin:0;">
+        <label class="form-label">Tipo de plan</label>
+        <select id="mem-type-${studentId}" class="form-input" onchange="toggleBonoFields(${studentId})">
+          <option value="monthly">Mensualidad</option>
+          <option value="bono">Bono de clases</option>
+          <option value="single">Clase suelta</option>
+        </select>
+      </div>
+      <div id="mem-bono-${studentId}" style="display:none;" class="form-group" style="margin:0;">
+        <label class="form-label">Número de clases</label>
+        <input type="number" id="mem-classes-${studentId}" class="form-input" value="10" min="1" max="50">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <input type="checkbox" id="mem-paid-${studentId}" checked style="width:18px;height:18px;accent-color:var(--primary);">
+        <label for="mem-paid-${studentId}" style="font-size:14px;">Marcar como pagado</label>
+      </div>
+      <button class="btn btn-primary" onclick="createMembership(${studentId})">💳 Asignar plan</button>
+    </div>`;
+}
+
+function toggleBonoFields(studentId) {
+  const type = document.getElementById(`mem-type-${studentId}`).value;
+  document.getElementById(`mem-bono-${studentId}`).style.display = type === 'bono' ? 'block' : 'none';
+}
+
+async function createMembership(studentId) {
+  const type      = document.getElementById(`mem-type-${studentId}`).value;
+  const isPaid    = document.getElementById(`mem-paid-${studentId}`).checked;
+  const classes   = parseInt(document.getElementById(`mem-classes-${studentId}`)?.value) || null;
+  const body = {
+    student_id:    studentId,
+    type:          type,
+    total_classes: type === 'bono' ? classes : null,
+    is_paid:       isPaid,
+  };
+  try {
+    await api('POST', '/memberships', body);
+    // Si ya había membresía, marcar como pagado directamente actualiza
+    if (isPaid) {
+      const mems = await api('GET', '/memberships');
+      const newMem = mems?.find(m => m.student_id === studentId);
+      if (newMem && !newMem.is_paid) await api('POST', `/memberships/${newMem.id}/paid`);
+    }
+    toast('✅ Plan asignado correctamente');
+    closeModal('modal-student');
+    loadStudents();
+  } catch (err) {
+    toast('⚠️ ' + err.message);
+  }
+}
+
 function openStudentModal(student, mem) {
   document.getElementById('modal-student-name').textContent  = student.name;
   document.getElementById('modal-student-email').textContent = student.email;
@@ -472,10 +526,20 @@ function openStudentModal(student, mem) {
           <div class="bono-of">${mem.type === 'bono' ? `de ${mem.total_classes}` : 'mensual'}</div>
         </div>
       </div>
-      ${!mem.is_paid ? `<button class="btn btn-primary" onclick="markPaid(${mem.id})">✓ Marcar como pagado</button>` : ''}
-      <button class="btn btn-outline" onclick="sendPaymentReminder(${student.id}, '${student.name}')">Enviar recordatorio de pago</button>`;
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+        ${!mem.is_paid ? `<button class="btn btn-primary" style="flex:1;" onclick="markPaid(${mem.id})">✓ Marcar como pagado</button>` : ''}
+        <button class="btn btn-outline" style="flex:1;" onclick="sendPaymentReminder(${student.id}, '${student.name}')">📩 Recordatorio</button>
+      </div>
+      <details style="margin-top:8px;">
+        <summary style="cursor:pointer;font-size:13px;color:var(--text-muted);padding:4px 0;">✏️ Cambiar plan</summary>
+        ${assignMembershipForm(student.id)}
+      </details>`;
   } else {
-    memHtml = `<div class="empty" style="padding:16px 0;"><span class="emoji">💳</span>Sin membresía asignada</div>`;
+    memHtml = `
+      <div style="background:var(--surface);border-radius:12px;padding:16px;margin-top:4px;">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">💳 Sin membresía asignada</div>
+        ${assignMembershipForm(student.id)}
+      </div>`;
   }
 
   // Notas del entrenador

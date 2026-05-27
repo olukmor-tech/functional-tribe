@@ -148,6 +148,7 @@ class MembershipCreate(BaseModel):
     student_id:    int
     type:          MembershipType
     total_classes: Optional[int]      = None  # solo para bono
+    is_paid:       Optional[bool]     = False
     valid_from:    Optional[datetime] = None
     valid_to:      Optional[datetime] = None
     notes:         Optional[str]      = None

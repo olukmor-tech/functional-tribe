@@ -423,7 +423,11 @@ def create_membership(
     db: Session = Depends(get_db),
     trainer: models.User = Depends(auth.require_trainer)
 ):
-    mem = models.Membership(**data.model_dump())
+    mem_data = data.model_dump()
+    is_paid = mem_data.pop('is_paid', False)
+    mem = models.Membership(**mem_data)
+    if is_paid:
+        mem.is_paid = True
     db.add(mem)
     db.commit()
     db.refresh(mem)
